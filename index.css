@@ -13,7 +13,8 @@ html, body {
 #board {
   padding: 3px;
   border: 1px solid red;
-  display: flex;
+  display: grid;;
+  grid-template-columns: auto auto auto;
 }
 
 .space {
@@ -29,4 +30,5 @@ html, body {
   height: 96%;
   background-color:bisque;
   border: 1px solid black;
+  cursor: pointer;
 }

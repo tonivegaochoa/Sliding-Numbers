@@ -17,7 +17,9 @@ function moveToAdjacent() {
     } else {
       spacesArr[index-1].appendChild(this);
     }
-  } else if(diff > 1) {
+  } else if(diff === 3) {
+    spacesArr[emptyIndex].appendChild(this);
+  } else if(diff === 2) {
     if(index < emptyIndex) {
       for(let i = index; i < emptyIndex; i++) {
         spacesArr[i+1].appendChild(spacesArr[i].firstChild);
