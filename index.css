@@ -1,0 +1,33 @@
+html, body {
+  height: 100%;
+}
+
+#container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid blue;
+}
+
+#board {
+  padding: 3px;
+  border: 1px solid red;
+  display: flex;
+}
+
+.space {
+  height: 50px;
+  width: 50px;
+  /* margin: 1px; */
+  /* border: 1px solid black; */
+}
+
+.tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 96%;
+  background-color:bisque;
+  border: 1px solid black;
+}
