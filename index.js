@@ -6,9 +6,11 @@ const gameBoard = (() => {
   const size = 3;
   const numSpaces = size*size;
 
+  const event = new Event('click');
+
   tiles.forEach(tile => tile.addEventListener('click', tileClicked));
 
-  function tileClicked() {
+  function tileClicked(e) {
     const index = board.findIndex(e => e.firstChild === this);
     const emptyIndex = board.findIndex(e => e.childElementCount === 0);
     const diff = Math.abs(emptyIndex - index);
@@ -55,55 +57,24 @@ const gameBoard = (() => {
         }
       }
     }
-
-    if(solved()) {
-      setTimeout(displayController.solved, 100);
-    }
   };
 
-  const solved = () => {
-    if(board[numSpaces-1].firstChild) return false;
-    return board.every((space,index) => {
-      if(!space.firstChild) return true;
-      return space.firstChild.id == index+1;
-    });
-  }
-
-  return {board, tiles, numSpaces};
+  return {board, tiles, size, numSpaces, event};
 })();
 
 const gameController = (() => {
-  const shuffleArray = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  }
-
   const shuffle = () => {
-    shuffleArray(gameBoard.tiles);
-    gameBoard.board.forEach((space, index) => {
-      if(index < gameBoard.numSpaces-1) {
-        space.appendChild(gameBoard.tiles[index]);
-      }
-    })
+    for(let i = 0; i < 100*gameBoard.size; i++) {
+      const r = Math.floor(Math.random() * 100 % 8);
+      gameBoard.tiles[r].dispatchEvent(gameBoard.event);
+    }
   };
 
-  const newGame = () => {
-    shuffle();
-  };
-
-  return {newGame};
+  return {shuffle};
 })();
 
 const displayController = (() => {
-  const newGameBtn = document.querySelector('button');
+  const shuffleBtn = document.querySelector('button');
 
-  newGameBtn.addEventListener('click', gameController.newGame);
-
-  const solved = () => {
-    window.alert('You solved the puzzle');
-  }
-
-  return {solved};
+  shuffleBtn.addEventListener('click', gameController.shuffle);
 })();
