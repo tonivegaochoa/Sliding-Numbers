@@ -29,6 +29,16 @@ function moveToAdjacent() {
         spacesArr[i].appendChild(spacesArr[i+1].firstChild);
       }
     }
+  } else if(diff === 6) {
+    if(index < emptyIndex) {
+      for(let i = index; i < emptyIndex; i+=3) {
+        spacesArr[i+3].appendChild(spacesArr[i].firstChild);
+      }
+    } else {
+      for(let i = emptyIndex; i < index; i+=3) {
+        spacesArr[i].appendChild(spacesArr[i+3].firstChild);
+      }
+    }
   }
 }
 
